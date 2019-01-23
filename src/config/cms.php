@@ -6,6 +6,7 @@ return [
     "site"  =>  [
         "nicename"  =>  "Laravel Tester"
     ],
+
     "prefix"   => "admin",
 
     "fields"    => [
@@ -14,5 +15,9 @@ return [
                 "body"  => new TextField("body", "Content")
             ],
         ]
+    ],
+
+    "post_types"    =>  [
+        \Pelomedusa\Cms\Controllers\PostController::class
     ]
 ];

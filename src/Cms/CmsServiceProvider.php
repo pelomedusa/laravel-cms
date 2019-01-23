@@ -1,12 +1,9 @@
 <?php
 namespace Pelomedusa\Cms;
 
-use Illuminate\Auth\Events\Authenticated;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Event;
+
 use Illuminate\Support\ServiceProvider;
-use Pelomedusa\Cms\Commands\Cms;
+use Pelomedusa\Cms\Commands\CmsMigrate;
 /**
  * Class TwoFAProvider
  *
@@ -22,15 +19,16 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../public/' => public_path('cms'),
+            __DIR__.'/Controllers' => public_path('cms'),
         ], 'public');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'cms');
 
-/*        if ($this->app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             $this->commands([
-                Cms::class,
+                CmsMigrate::class,
             ]);
-        }*/
+        }
 
 
         $this->publishes([

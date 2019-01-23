@@ -19,6 +19,7 @@
                 </a>
             </li>
 
+
             {{--<li>
                 <a href="#"><i class="fa fa-bar-chart fa-lg fa-fw sidebar-icon"></i> Statistics</a>
             </li>

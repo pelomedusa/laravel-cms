@@ -2,8 +2,7 @@
 
 namespace Pelomedusa\Cms\Controllers;
 
-use Pelomedusa\Cms\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Pelomedusa\Cms\Models\Page;
 
 class FieldController extends Controller
