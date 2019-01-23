@@ -13,7 +13,7 @@ class PageRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class PageRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'slug' => 'required|unique:posts|max:255',
+            'slug' => 'required|unique:cms_page,slug,'.$this->id.'|alpha_dash|max:255',
         ];
     }
 }

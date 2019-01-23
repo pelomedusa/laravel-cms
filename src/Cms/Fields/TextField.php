@@ -10,25 +10,27 @@ namespace Pelomedusa\Cms\Fields;
 
 
 use Pelomedusa\Cms\Interfaces\Field;
+use Form;
+use Pelomedusa\Cms\Models\PageField;
 
 class TextField implements Field
 {
     /**
      * @var string
      */
-    private $identifier;
+    public $identifier;
     /**
      * @var string
      */
-    private $label;
+    public $label;
     /**
      * @var string
      */
-    private $placeholder;
+    public $placeholder;
     /**
      * @var string
      */
-    private $default;
+    public $default;
 
     /**
      * TextField constructor.
@@ -55,13 +57,15 @@ class TextField implements Field
         ];
     }
 
-    public function render()
+    public function render($field)
     {
-        // TODO: Implement render() method.
+        echo Form::label($this->identifier, $this->label);
+        echo Form::text($this->identifier,$field ? $field->value : null, ["placeholder"  =>  $this->placeholder]);
+        echo "<br>";
     }
 
-    public function save()
+    public function prepare($value)
     {
-        // TODO: Implement save() method.
+        return $value;
     }
 }

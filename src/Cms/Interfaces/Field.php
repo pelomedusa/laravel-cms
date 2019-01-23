@@ -3,9 +3,11 @@
 namespace Pelomedusa\Cms\Interfaces;
 
 
+use Pelomedusa\Cms\Models\PageField;
+
 interface Field{
 
-    public function render();
-    public function save();
+    public function render($field);
+    public function prepare($value);
 }
 ?>

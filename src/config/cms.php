@@ -12,7 +12,7 @@ return [
         "pages" => [
             "any"   => [
                 "body"  => new TextField("body", "Content")
-            ]
+            ],
         ]
     ]
 ];

@@ -16,11 +16,11 @@ class WyswigField implements Field
     /**
      * @var string
      */
-    private $identifier;
+    public $identifier;
     /**
      * @var string
      */
-    private $label;
+    public $label;
 
 
     /**
@@ -35,13 +35,13 @@ class WyswigField implements Field
         $this->label = $label;
     }
 
-    public function render()
+    public function render($field)
     {
         // TODO: Implement render() method.
     }
 
-    public function save()
+    public function prepare($value)
     {
-        // TODO: Implement save() method.
+       return $value;
     }
 }
