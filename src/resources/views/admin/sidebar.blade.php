@@ -14,7 +14,7 @@
                     <i class="fa fa-file-alt  fa-lg fa-fw sidebar-icon"></i>
                     Pages
                 </a>
-                <a class="sidebar-link-10" href="#">
+                <a class="sidebar-link-10" href="{{ route("admin.pages.new") }}">
                     <i class="fa fa-plus fa-lg fa-fw sidebar-icon fa-small"></i>
                 </a>
             </li>

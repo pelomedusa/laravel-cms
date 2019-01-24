@@ -57,7 +57,7 @@ class TextField implements Field
         ];
     }
 
-    public function render($field)
+    public function render(PageField $field = null)
     {
         echo Form::label($this->identifier, $this->label);
         echo Form::text($this->identifier,$field ? $field->value : null, ["placeholder"  =>  $this->placeholder]);

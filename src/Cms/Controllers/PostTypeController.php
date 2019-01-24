@@ -11,27 +11,27 @@ class PostTypeController extends Controller
     /**
      * @var string
      */
-    protected $_name;
+    protected static $_name;
 
     /**
      * @var string
      */
-    protected $_plural;
+    protected static $_plural;
 
     /**
      * @var string
      */
-    protected $_slug;
+    protected static $_slug;
 
     /**
      * @var array
      */
-    protected $_fields;
+    protected static $_fields;
 
     /**
      * @var string
      */
-    protected $_menu_name;
+    protected static $_menu_name;
 
 
 
@@ -40,65 +40,35 @@ class PostTypeController extends Controller
      */
     public function getName()
     {
-        return $this->_name;
+        return static::$_name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->_name = $name;
-    }
 
     /**
      * @return string
      */
     public function getPlural()
     {
-        return $this->_plural;
+        return static::$_plural;
     }
 
-    /**
-     * @param string $plural
-     */
-    public function setPlural($plural)
-    {
-        $this->_plural = $plural;
-    }
 
     /**
      * @return string
      */
     public function getSlug()
     {
-        return $this->_slug;
+        return static::$_slug;
     }
 
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->_slug = $slug;
-    }
 
     /**
      * @return string
      */
     public function getMenuName()
     {
-        return $this->_menu_name;
+        return static::$_menu_name;
     }
-
-    /**
-     * @param string $menu_name
-     */
-    public function setMenuName($menu_name)
-    {
-        $this->_menu_name = $menu_name;
-    }
-
 
 
     /**
@@ -106,16 +76,9 @@ class PostTypeController extends Controller
      */
     public function getFields()
     {
-        return $this->_fields;
+        return static::$_fields;
     }
 
-    /**
-     * @param array $fields
-     */
-    public function setFields(array $fields)
-    {
-        $this->_fields = $fields;
-    }
 
 
 

@@ -9,15 +9,9 @@ use Pelomedusa\Cms\Interfaces\PostType;
 class PostController extends PostTypeController
 {
 
+    protected static $_name ="Post";
+    protected static $_plural ="Posts";
+    protected static $_slug ="post";
+    protected static $_menu_name ="My Posts";
 
-    /**
-     * PostController constructor.
-     */
-    public function __construct()
-    {
-        $this->setName("Post");
-        $this->setPlural("Posts");
-        $this->setSlug("post");
-        $this->setMenuName("My Posts");
-    }
 }

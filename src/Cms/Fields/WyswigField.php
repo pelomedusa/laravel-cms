@@ -10,6 +10,7 @@ namespace Pelomedusa\Cms\Fields;
 
 
 use Pelomedusa\Cms\Interfaces\Field;
+use Pelomedusa\Cms\Models\PageField;
 
 class WyswigField implements Field
 {
@@ -35,7 +36,7 @@ class WyswigField implements Field
         $this->label = $label;
     }
 
-    public function render($field)
+    public function render(PageField $field = null)
     {
         // TODO: Implement render() method.
     }

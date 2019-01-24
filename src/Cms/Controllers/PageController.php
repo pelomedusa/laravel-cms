@@ -25,6 +25,34 @@ class PageController extends Controller
         return view('cms::admin.page.list')->with("pages", $pages);
     }
 
+    public function showNew(){
+
+        return view('cms::admin.page.new');
+    }
+
+    public static function postNew(PageRequest $request){
+
+        $page = new Page();
+        $page->title = $request->title;
+        $page->slug = $request->slug;
+        $page->save();
+
+        if ($fields = FieldController::getFieldsObjects($page)){
+            foreach ($fields as $fieldObject){
+                $identifier = $fieldObject->identifier;
+                if ( $request->{$identifier} ){
+                    $field = PageField::findComposite($page->id, $identifier) ?: new PageField();
+                    $field->page_id = $page->id;
+                    $field->key = $identifier;
+                    $field->value = $fieldObject->prepare($request->{$identifier});
+                    $field->save();
+                }
+            }
+        }
+
+        return redirect()->route("admin.pages.edit.post", $page->id);
+    }
+
     public function showEdit($id){
         $page = Page::whereId($id)->firstOrFail();
 
