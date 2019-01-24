@@ -4,7 +4,7 @@ namespace Pelomedusa\Cms\Controllers;
 
 use App\Http\Controllers\Controller;
 
-use Pelomedusa\Cms\Interfaces\PostType;
+use Pelomedusa\Cms\Models\PostType;
 
 class PostTypeController
 {
@@ -33,7 +33,20 @@ class PostTypeController
      */
     protected static $_menu_name;
 
+    /**
+     * @var string
+     */
+    protected static $_icon;
 
+
+
+    function showListing(){
+        $posts = PostType::from("cms_".$this->getSlug())->get();
+
+        return view('cms::admin.posttype.list')
+            ->with("posts", $posts)
+            ->with("title", $this->getName());
+    }
 
     /**
      * @return string
@@ -68,6 +81,14 @@ class PostTypeController
     public static function getMenuName()
     {
         return static::$_menu_name;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getIcon()
+    {
+        return static::$_icon;
     }
 
 

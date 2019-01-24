@@ -4,13 +4,13 @@ namespace Pelomedusa\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Page extends Model
+class PostType extends Model
 {
-    protected $table = 'cms_page';
+    protected $table = '';
 
-
-    public function field($key){
-        return PageField::findComposite($this->id, $key);
+    public static function scopeFromTable($query, $tableName)
+    {
+        $query->from($tableName);
     }
 
     /**

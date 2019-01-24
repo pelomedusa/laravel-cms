@@ -22,7 +22,7 @@
                 @foreach($post_types as $post_type)
                 <li>
                     <a class="sidebar-link-80" href="{{ route("admin.".$post_type::getSlug()) }}">
-                        <i class="fa fa-file-alt  fa-lg fa-fw sidebar-icon"></i>
+                        <i class="fa {{ $post_type::getIcon() }}  fa-lg fa-fw sidebar-icon"></i>
                         {{  $post_type::getMenuName() }}
                     </a>
                     <a class="sidebar-link-10" href="{{ route("admin.".$post_type::getSlug().".new") }}">

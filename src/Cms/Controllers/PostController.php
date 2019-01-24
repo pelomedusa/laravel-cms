@@ -13,5 +13,6 @@ class PostController extends PostTypeController
     protected static $_plural ="Posts";
     protected static $_slug ="post";
     protected static $_menu_name ="My Posts";
+    protected static $_icon ="fa-adjust";
 
 }
