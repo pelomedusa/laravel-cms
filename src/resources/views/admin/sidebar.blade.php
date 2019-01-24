@@ -18,6 +18,19 @@
                     <i class="fa fa-plus fa-lg fa-fw sidebar-icon fa-small"></i>
                 </a>
             </li>
+            @if($post_types = config("cms.post_types"))
+                @foreach($post_types as $post_type)
+                <li>
+                    <a class="sidebar-link-80" href="{{ route("admin.".$post_type::getSlug()) }}">
+                        <i class="fa fa-file-alt  fa-lg fa-fw sidebar-icon"></i>
+                        {{  $post_type::getMenuName() }}
+                    </a>
+                    <a class="sidebar-link-10" href="{{ route("admin.".$post_type::getSlug().".new") }}">
+                        <i class="fa fa-plus fa-lg fa-fw sidebar-icon fa-small"></i>
+                    </a>
+                </li>
+                @endforeach
+            @endif
 
 
             {{--<li>

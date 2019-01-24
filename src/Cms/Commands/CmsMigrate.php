@@ -49,13 +49,12 @@ class CmsMigrate extends Command
             foreach ($post_types_classes as $post_types_class){
 
                 /** @var PostTypeController $post_types_class */
-                $post_type = new $post_types_class;
-                $slug = $post_type->getSlug();
+                $slug = $post_types_class::getSlug();
                 $table_name = "cms_$slug";
                 $table_values_name = "cms_${slug}_values";
 
                 if (!Schema::hasTable($table_name)){
-                    Schema::create($table_name, function (Blueprint $table) use ($post_type, $slug){
+                    Schema::create($table_name, function (Blueprint $table) use ($slug){
                         $table->increments('id');
                         $table->string('title');
                         $table->string('slug');

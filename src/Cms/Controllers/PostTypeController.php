@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Pelomedusa\Cms\Interfaces\PostType;
 
-class PostTypeController extends Controller
+class PostTypeController
 {
     /**
      * @var string
@@ -38,7 +38,7 @@ class PostTypeController extends Controller
     /**
      * @return string
      */
-    public function getName()
+    public static function getName()
     {
         return static::$_name;
     }
@@ -47,7 +47,7 @@ class PostTypeController extends Controller
     /**
      * @return string
      */
-    public function getPlural()
+    public static function getPlural()
     {
         return static::$_plural;
     }
@@ -56,7 +56,7 @@ class PostTypeController extends Controller
     /**
      * @return string
      */
-    public function getSlug()
+    public static function getSlug()
     {
         return static::$_slug;
     }
@@ -65,7 +65,7 @@ class PostTypeController extends Controller
     /**
      * @return string
      */
-    public function getMenuName()
+    public static function getMenuName()
     {
         return static::$_menu_name;
     }
@@ -74,7 +74,7 @@ class PostTypeController extends Controller
     /**
      * @return array
      */
-    public function getFields()
+    public static function getFields()
     {
         return static::$_fields;
     }
