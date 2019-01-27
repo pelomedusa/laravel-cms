@@ -12,7 +12,7 @@ namespace Pelomedusa\Cms\Fields;
 use Pelomedusa\Cms\Interfaces\Field;
 use Pelomedusa\Cms\Models\PageField;
 
-class WyswigField implements Field
+class TextAreaField implements Field
 {
     /**
      * @var string
@@ -38,7 +38,9 @@ class WyswigField implements Field
 
     public function render(PageField $field = null)
     {
-        // TODO: Implement render() method.
+        echo Form::label($this->identifier, $this->label);
+        echo Form::textarea($this->identifier,$field ? $field->value : null, ["placeholder"  =>  $this->placeholder]);
+        echo "<br>";
     }
 
     public function prepare($value)
