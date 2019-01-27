@@ -45,11 +45,11 @@ class CmsMigrate extends Command
      */
     public function handle()
     {
-        if ( $post_types_classes = config("cms.post_types") ){
-            foreach ($post_types_classes as $post_types_class){
+        if ( $post_types = config("cms.post_types") ){
+            foreach ($post_types as $post_type){
 
-                /** @var PostTypeController $post_types_class */
-                $slug = $post_types_class::getSlug();
+                /** @var PostTypeController $post_type */
+                $slug = $post_type->getSlug();
                 $table_name = "cms_$slug";
                 $table_values_name = "cms_${slug}_values";
 

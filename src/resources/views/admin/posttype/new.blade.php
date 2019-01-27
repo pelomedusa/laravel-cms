@@ -11,7 +11,7 @@
         {{ Form::label("slug", "Slug : ") }}
         {{ Form::text("slug", null) }}<br>
 
-        {{ \Pelomedusa\Cms\Controllers\FieldController::renderFields() }}
+        {!! $fields !!}
 
         {{ Form::submit("Ok") }}
 

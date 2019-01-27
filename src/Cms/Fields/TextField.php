@@ -18,19 +18,19 @@ class TextField implements Field
     /**
      * @var string
      */
-    public $identifier;
+    protected $identifier;
     /**
      * @var string
      */
-    public $label;
+    protected $label;
     /**
      * @var string
      */
-    public $placeholder;
+    protected $placeholder;
     /**
      * @var string
      */
-    public $default;
+    protected $default;
 
     /**
      * TextField constructor.
@@ -48,20 +48,11 @@ class TextField implements Field
     }
 
 
-    public static function wyswig($identifier, $title, $placeholder="", $default=""){
-        return [
-            "identifier"    => $identifier,
-            "title"    => $title,
-            "placeholder"    => $placeholder,
-            "default"    => $default,
-        ];
-    }
-
     public function render(PageField $field = null)
     {
-        echo Form::label($this->identifier, $this->label);
-        echo Form::text($this->identifier,$field ? $field->value : null, ["placeholder"  =>  $this->placeholder]);
-        echo "<br>";
+        $html = Form::label($this->identifier, $this->label);
+        $html .= Form::text($this->identifier,$field ? $field->value : null, ["placeholder"  =>  $this->placeholder]);
+        return $html.= "<br>";
     }
 
     public function prepare($value)

@@ -11,32 +11,32 @@ class PostTypeController
     /**
      * @var string
      */
-    protected static $_name;
+    protected $_name;
 
     /**
      * @var string
      */
-    protected static $_plural;
+    protected $_plural;
 
     /**
      * @var string
      */
-    protected static $_slug;
+    protected $_slug;
 
     /**
      * @var array
      */
-    protected static $_fields;
+    protected $_fields;
 
     /**
      * @var string
      */
-    protected static $_menu_name;
+    protected $_menu_name;
 
     /**
      * @var string
      */
-    protected static $_icon;
+    protected $_icon;
 
 
 
@@ -48,59 +48,118 @@ class PostTypeController
             ->with("title", $this->getName());
     }
 
-    /**
-     * @return string
-     */
-    public static function getName()
-    {
-        return static::$_name;
+    public function renderFields(Page $page = null){
+        $fields = $this->getFields();
+
+        $return ="";
+        if ($fields) foreach ($fields as $field){
+            $return .= $field->render($page ? $page->field($field->identifier) : null);
+        }
+        return $return;
     }
 
 
-    /**
-     * @return string
-     */
-    public static function getPlural()
-    {
-        return static::$_plural;
-    }
+    public function showNew(){
 
-
-    /**
-     * @return string
-     */
-    public static function getSlug()
-    {
-        return static::$_slug;
-    }
-
-
-    /**
-     * @return string
-     */
-    public static function getMenuName()
-    {
-        return static::$_menu_name;
+        return view('cms::admin.posttype.new')
+            ->with("fields", $this->renderFields());
     }
 
     /**
      * @return string
      */
-    public static function getIcon()
+    public function getName()
     {
-        return static::$_icon;
+        return $this->_name;
     }
 
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlural()
+    {
+        return $this->_plural;
+    }
+
+    /**
+     * @param string $plural
+     */
+    public function setPlural($plural)
+    {
+        $this->_plural = $plural;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->_slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->_slug = $slug;
+    }
 
     /**
      * @return array
      */
-    public static function getFields()
+    public function getFields()
     {
-        return static::$_fields;
+        return $this->_fields;
     }
 
+    /**
+     * @param array $fields
+     */
+    public function setFields($fields)
+    {
+        $this->_fields = $fields;
+    }
 
+    /**
+     * @return string
+     */
+    public function getMenuName()
+    {
+        return $this->_menu_name;
+    }
+
+    /**
+     * @param string $menu_name
+     */
+    public function setMenuName($menu_name)
+    {
+        $this->_menu_name = $menu_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->_icon;
+    }
+
+    /**
+     * @param string $icon
+     */
+    public function setIcon($icon)
+    {
+        $this->_icon = $icon;
+    }
 
 
 }

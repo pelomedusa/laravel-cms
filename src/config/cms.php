@@ -18,6 +18,6 @@ return [
     ],
 
     "post_types"    =>  [
-        \Pelomedusa\Cms\Controllers\PostController::class
+        new \Pelomedusa\Cms\Controllers\PostController()
     ]
 ];

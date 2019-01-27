@@ -13,18 +13,17 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' =>  config("cms.prefix")
     Route::get('/pages/{id}', 'Pelomedusa\Cms\Controllers\PageController@showEdit')->name('admin.pages.edit');
     Route::post('/pages/{id}', 'Pelomedusa\Cms\Controllers\PageController@postEdit')->name('admin.pages.edit.post');
 
-    if ($post_types_classes = config("cms.post_types")){
-        foreach ($post_types_classes as $post_types_class){
-            $slug = $post_types_class::getSlug();
+    if ($post_types = config("cms.post_types")){
+        foreach ($post_types as $post_type){
+            $slug = $post_type->getSlug();
 
+            Route::get("/$slug", get_class($post_type)."@showListing")->name("admin.$slug");
 
-            Route::get("/$slug", "$post_types_class@showListing")->name("admin.$slug");
+            Route::get("/$slug/new", get_class($post_type)."@showNew")->name("admin.$slug.new");
+            Route::post("/$slug/new", get_class($post_type)."@postNew")->name("admin.$slug.new.post");
 
-            Route::get("/$slug/new", "$post_types_class@showNew")->name("admin.$slug.new");
-            Route::post("/$slug/new", "$post_types_class@postNew")->name("admin.$slug.new.post");
-
-            Route::get("/$slug/{id}", "$post_types_class@showEdit")->name("admin.$slug.edit");
-            Route::post("/$slug/{id}", "$post_types_class@postEdit")->name("admin.$slug.edit.post");
+            Route::get("/$slug/{id}", get_class($post_type)."@showEdit")->name("admin.$slug.edit");
+            Route::post("/$slug/{id}", get_class($post_type)."@postEdit")->name("admin.$slug.edit.post");
 
         }
     }

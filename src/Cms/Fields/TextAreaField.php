@@ -8,7 +8,7 @@
 
 namespace Pelomedusa\Cms\Fields;
 
-
+use Form;
 use Pelomedusa\Cms\Interfaces\Field;
 use Pelomedusa\Cms\Models\PageField;
 
@@ -17,11 +17,11 @@ class TextAreaField implements Field
     /**
      * @var string
      */
-    public $identifier;
+    protected $identifier;
     /**
      * @var string
      */
-    public $label;
+    protected $label;
 
 
     /**
@@ -38,9 +38,9 @@ class TextAreaField implements Field
 
     public function render(PageField $field = null)
     {
-        echo Form::label($this->identifier, $this->label);
-        echo Form::textarea($this->identifier,$field ? $field->value : null, ["placeholder"  =>  $this->placeholder]);
-        echo "<br>";
+        $html = Form::label($this->identifier, $this->label);
+        $html .= Form::textarea($this->identifier,$field ? $field->value : null);
+        return $html.= "<br>";
     }
 
     public function prepare($value)
