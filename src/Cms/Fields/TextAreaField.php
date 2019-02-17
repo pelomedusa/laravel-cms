@@ -36,7 +36,7 @@ class TextAreaField implements Field
         $this->label = $label;
     }
 
-    public function render(PageField $field = null)
+    public function render($field = null)
     {
         $html = Form::label($this->identifier, $this->label);
         $html .= Form::textarea($this->identifier,$field ? $field->value : null);

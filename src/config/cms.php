@@ -12,7 +12,7 @@ return [
     "fields"    => [
         "pages" => [
             "any"   => [
-                "body"  => new TextField("body", "Content")
+                "body"  => new TextField("body", "Body")
             ],
         ]
     ],

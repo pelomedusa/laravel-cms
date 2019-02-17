@@ -30,7 +30,7 @@ class Box implements Field
     }
 
 
-    public function render(PageField $field = null)
+    public function render($field = null)
     {
         $html = "<div class='nice'>";
         if ($this->fields) foreach ($this->fields as $field){

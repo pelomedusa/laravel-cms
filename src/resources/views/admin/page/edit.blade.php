@@ -12,7 +12,7 @@
     {{ Form::label("slug", "Slug : ") }}
     {{ Form::text("slug", $page->slug) }}<br>
 
-    {{ \Pelomedusa\Cms\Controllers\PageController::renderFields($page) }}
+    {!! \Pelomedusa\Cms\Controllers\PageController::renderFields($page) !!}
 
     {{ Form::submit("Ok") }}
     {{ Form::close() }}

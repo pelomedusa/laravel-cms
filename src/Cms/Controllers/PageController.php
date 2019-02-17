@@ -3,6 +3,7 @@
 namespace Pelomedusa\Cms\Controllers;
 
 use App\Http\Controllers\Controller;
+use Pelomedusa\Cms\Interfaces\Field;
 use Pelomedusa\Cms\Models\Page;
 use Pelomedusa\Cms\Models\PageField;
 use Pelomedusa\Cms\Requests\PageRequest;
@@ -35,54 +36,50 @@ class PageController extends Controller
         $page = new Page();
         $page->title = $request->title;
         $page->slug = $request->slug;
-        $page->save();
 
-        if ($fields = FieldController::getFieldsObjects($page)){
+        if ($fields = self::getFieldsObjects($page)){
             foreach ($fields as $fieldObject){
-                $identifier = $fieldObject->identifier;
+                $identifier = $fieldObject->getIdentifier();
                 if ( $request->{$identifier} ){
-                    $field = PageField::findComposite($page->id, $identifier) ?: new PageField();
-                    $field->page_id = $page->id;
-                    $field->key = $identifier;
-                    $field->value = $fieldObject->prepare($request->{$identifier});
-                    $field->save();
+                    $page->fields->{$identifier} = $fieldObject->prepare($request->{$identifier});
                 }
             }
         }
+        $page->save();
+
 
         return redirect()->route("admin.pages.edit.post", $page->id);
     }
 
     public function showEdit($id){
-        $page = Page::whereId($id)->firstOrFail();
-
+        $page = Page::find($id)->firstOrFail();
         return view('cms::admin.page.edit')->with("page", $page);
     }
 
     public static function postEdit($id, PageRequest $request){
 
-        $page = Page::whereId($id)->firstOrFail();
+        $page = Page::find($id)->firstOrFail();
         $page->title = $request->title;
         $page->slug = $request->slug;
-
-        if ($fields = FieldController::getFieldsObjects($page)){
-            foreach ($fields as $fieldObject){
-                $identifier = $fieldObject->identifier;
+        $fields_to_save = new \stdClass();
+        if ($fields_object = self::getFieldsObjects($page)){
+            foreach ($fields_object as $fieldObject){
+                $identifier = $fieldObject->getIdentifier();
                 if ( $request->{$identifier} ){
-                    $field = PageField::findComposite($page->id, $identifier) ?: new PageField();
-                    $field->page_id = $page->id;
-                    $field->key = $identifier;
-                    $field->value = $fieldObject->prepare($request->{$identifier});
-                    $field->save();
+                    $fields_to_save->{$identifier} = $fieldObject->prepare($request->{$identifier});
                 }
             }
         }
-
+        $page->fields = $fields_to_save;
         $page->save();
         return redirect()->route("admin.pages.edit.post", $page->id);
     }
 
 
+    /**
+     * @param Page|null $page
+     * @return Field[]
+     */
     public static function getFieldsObjects(Page $page = null){
         $fields_any = config("cms.fields.pages.any") ?: [];
         $fields_slug = $page ? (config("cms.fields.pages.".$page->slug) ?: [] ) : [];
@@ -94,10 +91,12 @@ class PageController extends Controller
 
     public static function renderFields(Page $page = null){
         $fields = self::getFieldsObjects($page);
-
         $return ="";
         if ($fields) foreach ($fields as $field){
-            $return .= $field->render($page ? $page->field($field->identifier) : null);
+            dd($page->fields);
+            $return .= $field->render(isset($page->fields->{$field->getIdentifier()}) ?
+                $page->fields->{$field->getIdentifier()} : ""
+                );
         }
         return $return;
     }

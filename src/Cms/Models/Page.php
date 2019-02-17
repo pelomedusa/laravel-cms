@@ -2,16 +2,13 @@
 
 namespace Pelomedusa\Cms\Models;
 
-use Illuminate\Database\Eloquent\Model;
+
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class Page extends Model
 {
-    protected $table = 'cms_page';
-
-
-    public function field($key){
-        return PageField::findComposite($this->id, $key);
-    }
+    protected $connection = 'mongodb';
+    protected $collection = 'cms_page';
 
     /**
      * Get the relationships for the entity.

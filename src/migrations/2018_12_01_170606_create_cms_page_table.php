@@ -19,21 +19,6 @@ class CreateCmsPageTable extends Migration
             $table->string('slug');
             $table->timestamps();
         });
-
-
-        Schema::create('cms_page_values', function (Blueprint $table) {
-            $table->increments('id');
-
-            $table->string('key');
-            $table->string('value');
-
-            $table->unsignedInteger('page_id');
-            $table->foreign('page_id')->references('id')->on('cms_page');
-
-            $table->timestamps();
-        });
-
-
     }
 
     /**

@@ -48,7 +48,7 @@ class TextField implements Field
     }
 
 
-    public function render(PageField $field = null)
+    public function render($field = null)
     {
         $html = Form::label($this->identifier, $this->label);
         $html .= Form::text($this->identifier,$field ? $field->value : null, ["placeholder"  =>  $this->placeholder]);
@@ -59,4 +59,38 @@ class TextField implements Field
     {
         return $value;
     }
+
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlaceholder()
+    {
+        return $this->placeholder;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+
 }
